@@ -12,32 +12,24 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLInt },
         name: { type: GraphQLString },
         email: { type: GraphQLString },
-        phone: { type: GraphQLInt } 
+        gender: { type: GraphQLString },
+        createdAt: { type: GraphQLString },
+        updatedAt: { type: GraphQLString } // Add this field manually
     })
 });
+
+var db =  require('./models') ;
+const user = db.users ;
 
 // CREATE DUMMY DATA
 // Alternatively, we use a mutation to do so
 const RootQuery = new GraphQLObjectType({
     name: 'Query', 
     fields: {
-        users: {
+        userlist: {
             type: new GraphQLList(UserType),
             resolve(parent, args) {
-                let data = [
-                    {
-                        id: 12,
-                        name: 'vishwajit',
-                        email: 'vishwa@gmail.com',
-                        phone: 89203521
-                    },
-                    {
-                        id: 14,
-                        name: 'rajesh',
-                        email: 'rajesh@gmail.com',
-                        phone: 454545412
-                    }
-                ];
+                let data = user.findAll()
                 return data;
             }
         }
