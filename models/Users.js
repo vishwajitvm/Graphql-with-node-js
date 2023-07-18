@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         email: DataTypes.STRING,
         gender: DataTypes.STRING,
+        age: DataTypes.INTEGER,
         createdAt: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
